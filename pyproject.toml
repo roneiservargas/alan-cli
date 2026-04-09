@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alan-ai-cli"
+version = "6.1.0"
+authors = [
+  { name="Roneiser Vargas", email="roneiserv2.0@gmail.com" },
+]
+description = "Asistente de IA para terminal con soporte de archivos"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "rich",
+    "prompt-toolkit",
+    "pygments"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+alan = "alan.main:chat"

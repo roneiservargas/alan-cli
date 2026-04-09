@@ -1,0 +1,2 @@
+[console_scripts]
+alan = alan.main:chat
