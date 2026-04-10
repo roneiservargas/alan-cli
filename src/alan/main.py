@@ -4,6 +4,7 @@ import requests
 import json
 import sys
 import re
+import signal
 from typing import List, Dict, Optional
 
 # TUI Libraries
@@ -148,8 +149,19 @@ class ChatInterface:
             '.file': PathCompleter(expanduser=True)
         })
 
+        # Suscribir a la señal de cambio de tamaño de ventana (SIGWINCH)
+        try:
+            signal.signal(signal.SIGWINCH, self._handle_resize)
+        except (AttributeError, ValueError):
+            pass
+
+    def _handle_resize(self, signum, frame):
+        # Forzar la actualización del tamaño en el objeto console de Rich
+        _ = self.console.size
+
     def print_panel(self, text, title="Alan", style="blue", box_style=box.ROUNDED):
-        self.console.print(Panel(text, title=title, border_style=style, box=box_style))
+        # Utiliza width=self.console.width para adaptarse al redimensionamiento
+        self.console.print(Panel(text, title=title, border_style=style, box=box_style, width=self.console.width))
 
     def handle_model(self):
         model_name = prompt("🤖 Ingresa el modelo (ej: anthropic/claude-3-opus): ").strip()
@@ -287,7 +299,7 @@ class ChatInterface:
                 if response.status_code == 200:
                     full_text = ""
                     with Live(
-                        Panel(Markdown(""), title="Alan", border_style="green", box=box.ROUNDED),
+                        Panel(Markdown(""), title="Alan", border_style="green", box=box.ROUNDED, width=self.console.width),
                         console=self.console,
                         refresh_per_second=15
                     ) as live:
@@ -302,7 +314,7 @@ class ChatInterface:
                                 content = data['choices'][0]['delta'].get('content', '')
                                 full_text += content
                                 live.update(
-                                    Panel(Markdown(full_text), title="Alan", border_style="green", box=box.ROUNDED)
+                                    Panel(Markdown(full_text), title="Alan", border_style="green", box=box.ROUNDED, width=self.console.width)
                                 )
                             except json.JSONDecodeError:
                                 continue
