@@ -1,65 +1,85 @@
-# 🚀 Alan - AI Terminal Assistant
+# 🚀 Alan AI CLI — v7.0 PRO
 
-**Alan** es una interfaz de línea de comandos (CLI) potente, ligera y elegante construida en Python para interactuar con modelos de inteligencia artificial a través de la API de **OpenRouter**. 
+**Alan** es un asistente de IA de alto rendimiento diseñado para vivir en tu terminal. Inspirado en herramientas como Claude Code y Gemini CLI, Alan ofrece una interfaz fluida, manejo de contexto de archivos y una experiencia de usuario optimizada para desarrolladores.
 
-Diseñado específicamente para ser compatible con entornos móviles como **Pydroid 3** y terminales de escritorio, Alan permite inyectar contexto de archivos locales directamente en tus conversaciones con la IA.
+---
 
-## ✨ Características
+## ✨ Características Principales
 
-- 🆓 **Acceso Gratuito**: Configurado por defecto para usar modelos gratuitos de OpenRouter (`openrouter/auto`).
-- 📁 **Inyección de Archivos**: Envía el contenido de archivos locales (`.py`, `.js`, `.html`, `.txt`, etc.) como contexto mediante comandos.
-- 📂 **Soporte Multi-archivo**: Capacidad para cargar múltiples archivos simultáneamente usando un delimitador.
-- ⚡ **Streaming**: Respuestas en tiempo real palabra por palabra.
-- 🌀 **Interfaz Animada**: Spinner de carga y colores ANSI para una experiencia visual superior.
-- 🧠 **Memoria de Sesión**: Mantiene el contexto de la conversación hasta que decidas limpiarlo.
+* **⚡ Interfaz Fluida:** Respuestas en streaming dentro de paneles elegantes con bordes redondeados.
+* **📂 Contexto de Archivos:** Inyecta múltiples archivos directamente en el chat usando el comando `.file`.
+* **💾 Extracción de Código:** Guarda el último bloque de código generado por la IA con un solo comando (`.save`).
+* **🤖 Flexibilidad de Modelos:** Cambia entre modelos de OpenRouter en caliente con `.model`.
+* **⌨️ Input Multilínea Pro:** * `Enter`: Enviar mensaje.
+    * `Alt + Enter`: Nueva línea.
+* **📱 Diseño Responsivo:** Manejo dinámico de señales (SIGWINCH) para adaptarse al cambio de tamaño de la terminal sin romper la visual.
+
+---
 
 ## 🛠️ Instalación
 
-1. **Clona o descarga** el repositorio.
-2. Asegúrate de tener instalado **Python 3.x**.
-3. Instala la única dependencia necesaria:
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/alan-cli.git
+   cd alan-cli
+   ```
+
+2. **Instala en modo editable:**
+   ```bash
+   pip install -e .
+   ```
+
+---
+
+## ⚙️ Configuración
+
+Alan busca tu **API KEY** de OpenRouter y tus preferencias en el archivo `~/.alanrc`. Si el archivo no existe, puedes crearlo manualmente:
+
 ```bash
-pip install requests
-```
-## 🚀 Configuración y Uso
-
-1.  Abre el archivo `alan.py` con tu editor de texto.
-    
-2.  Sustituye el valor de `API_KEY` por tu llave de [OpenRouter](https://openrouter.ai/).
- 
-```python
-API_KEY = "tu_api_key_aquí" 
+# ~/.alanrc
+API_KEY=tu_api_key_aqui
+MODEL=openrouter/auto
 ```
 
-3.  Ejecuta el programa:
-```Bash
-python alan.py    
-```
+> **Nota:** También puedes exportar la clave como variable de entorno: `export ALAN_API_KEY='tu_clave'`.
+
+---
 
 ## ⌨️ Comandos Disponibles
 
-Dentro del chat, puedes usar los siguientes comandos especiales:
-|**Comando**|**Descripción**|
-|--|--|
-|`.exit`|Cierra la aplicación de forma segura.|
-|`.clear`|Limpia el historial de la conversación actual.|
-|`.file <nombre> <instrucción>`| Lee un archivo y lo envía junto a tu pregunta.|
-|`.files <f1> <f2> -- <instrucción>`|Carga varios archivos separados por el delimitador `--`.|
+| Comando | Descripción |
+| :--- | :--- |
+| `.help` | Muestra el menú de ayuda con todos los comandos. |
+| `.model` | Cambia el modelo de IA y guarda la preferencia en `~/.alanrc`. |
+| `.file <f1> <f2> -- <prompt>` | Carga archivos como contexto para tu consulta. |
+| `.save <nombre.ext>` | Extrae el último bloque de código y lo guarda en un archivo. |
+| `.clear` | Limpia el historial de la sesión actual. |
+| `.exit` | Cierra la sesión de Alan. |
 
-### Ejemplos de uso:
+---
 
--   **Análisis de código:**
-`.file script.py explica qué hace esta función`
-    
--   **Análisis de proyecto (Multi-archivo):**
-` .files index.html style.css -- ¿Por qué no se ve el fondo rojo?`
+## 🖥️ Uso de Archivos
 
-## 📝 Requisitos
+Para trabajar con código existente, simplemente usa el comando `.file` seguido de los nombres de los archivos, un separador `--` y tu instrucción:
 
--   Conexión a Internet.
-    
--   Una API Key válida de OpenRouter.
-    
--   Librería `requests`.
+```text
+Tú ❯ .file main.py utils.py -- Analiza estos archivos y optimiza la lógica de reintento.
+```
 
-_Desarrollado con ❤️ para la comunidad de desarrolladores en movilidad._
+---
+
+## 🎨 Paleta de Colores
+Alan utiliza una paleta basada en **Azul y Verde** para una legibilidad máxima en temas oscuros:
+* **Tú:** Resaltado en Verde Cyan.
+* **Alan:** Paneles con bordes Verdes y títulos Azules.
+* **Sistema:** Mensajes de estado en Cyan dim.
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT.
+
+---
+
+**Desarrollado con ❤️ por Roneiser Vargas**
