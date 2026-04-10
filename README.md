@@ -11,29 +11,39 @@
 * **💾 Extracción de Código:** Guarda el último bloque de código generado por la IA con un solo comando (`.save`).
 * **🤖 Flexibilidad de Modelos:** Cambia entre modelos de OpenRouter en caliente con `.model`.
 * **⌨️ Input Multilínea Pro:** * `Enter`: Enviar mensaje.
-    * `Alt + Enter`: Nueva línea.
-* **📱 Diseño Responsivo:** Manejo dinámico de señales (SIGWINCH) para adaptarse al cambio de tamaño de la terminal sin romper la visual.
+    * `Alt + Enter`: Nueva línea (sin enviar).
+* **📱 Diseño Responsivo:** Manejo dinámico de señales (SIGWINCH) para adaptarse al cambio de tamaño de la terminal.
 
 ---
 
 ## 🛠️ Instalación
 
+### Requisitos Previos
+Asegúrate de tener Python 3.8+ instalado. Alan depende de las siguientes librerías:
+* `requests`: Para la comunicación con la API de OpenRouter.
+* `rich`: Para la interfaz visual (paneles, markdown, live-streaming).
+* `prompt-toolkit`: Para el manejo avanzado del input y autocompletado.
+* `pygments`: Para el resaltado de sintaxis en la terminal.
+
+### Pasos de Instalación
 1. **Clona el repositorio:**
    ```bash
    git clone https://github.com/tu-usuario/alan-cli.git
    cd alan-cli
    ```
 
-2. **Instala en modo editable:**
+2. **Instala las dependencias y el paquete:**
+   Se recomienda usar un entorno virtual, pero puedes instalarlo directamente con:
    ```bash
    pip install -e .
    ```
+   *Esto instalará automáticamente `requests`, `rich`, `prompt-toolkit` y `pygments` según lo definido en el archivo de configuración.*
 
 ---
 
 ## ⚙️ Configuración
 
-Alan busca tu **API KEY** de OpenRouter y tus preferencias en el archivo `~/.alanrc`. Si el archivo no existe, puedes crearlo manualmente:
+Alan busca tu **API KEY** de OpenRouter en el archivo `~/.alanrc`. Si el archivo no existe, puedes crearlo manualmente:
 
 ```bash
 # ~/.alanrc
@@ -65,20 +75,6 @@ Para trabajar con código existente, simplemente usa el comando `.file` seguido 
 ```text
 Tú ❯ .file main.py utils.py -- Analiza estos archivos y optimiza la lógica de reintento.
 ```
-
----
-
-## 🎨 Paleta de Colores
-Alan utiliza una paleta basada en **Azul y Verde** para una legibilidad máxima en temas oscuros:
-* **Tú:** Resaltado en Verde Cyan.
-* **Alan:** Paneles con bordes Verdes y títulos Azules.
-* **Sistema:** Mensajes de estado en Cyan dim.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT.
 
 ---
 
